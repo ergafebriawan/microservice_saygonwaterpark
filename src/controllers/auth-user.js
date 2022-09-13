@@ -13,7 +13,7 @@ module.exports = {
     getLogin(req, res){
         const username = req.body.kode;
         const password = md5(req.body.password);
-        const sql = "SELECT password, kode, nama, level FROM karyawan WHERE CONVERT(CAST(nama AS BINARY) USING utf8) = ?;";
+        const sql = "SELECT password, kode, nama, level FROM karyawan WHERE CONVERT(CAST(kode AS BINARY) USING utf8) = ?;";
         pool.getConnection(function(err, connection) {
             if (err) throw err;
             connection.query(sql,[username], function (error, results) {
