@@ -33,7 +33,7 @@ module.exports ={
     },
     pengunjungByTicket(req, res){
         const ticket = req.body.ticket;
-        const query = "SELECT itempenjualan.qty, itempenjualan.subtotal FROM (penjualan INNER JOIN itempenjualan ON itempenjualan.kode=penjualan.kode) WHERE CONVERT(CAST(itempenjualan.kode_barang AS BINARY) USING utf8) ='"+ticket+"' AND penjualan.tanggal=CURRENT_DATE';";
+        const query = "SELECT itempenjualan.qty, itempenjualan.subtotal FROM (penjualan INNER JOIN itempenjualan ON itempenjualan.kode=penjualan.kode) WHERE CONVERT(CAST(itempenjualan.kode_barang AS BINARY) USING utf8) ='"+ticket+"' AND CONVERT(CAST(penjualan.tanggal AS BINARY) USING utf8)=CURRENT_DATE;";
         pool.getConnection(function(err, connection) {
             if (err) throw err;
             connection.query(query, function (error, results) {
@@ -58,7 +58,7 @@ module.exports ={
     },
     pengunjungByKategori(req, res){
         const category = req.body.category;
-        const query = "SELECT itempenjualan.qty, itempenjualan.subtotal FROM itempenjualan LEFT JOIN penjualan ON itempenjualan.kode=penjualan.kode LEFT JOIN barang ON itempenjualan.nama_barang=barang.nama WHERE CONVERT(CAST(barang.kategori AS BINARY) USING utf8) = '"+category+"' AND penjualan.tanggal=CURRENT_DATE;";
+        const query = "SELECT itempenjualan.qty, itempenjualan.subtotal FROM itempenjualan LEFT JOIN penjualan ON itempenjualan.kode=penjualan.kode LEFT JOIN barang ON itempenjualan.nama_barang=barang.nama WHERE CONVERT(CAST(barang.kategori AS BINARY) USING utf8) = '"+category+"' AND CONVERT(CAST(penjualan.tanggal AS BINARY) USING utf8)=CURRENT_DATE;";
         pool.getConnection(function(err, connection) {
             if (err) throw err;
             connection.query(query, function (error, results) {

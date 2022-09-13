@@ -71,7 +71,7 @@ module.exports = {
         })
     },
     getUserMarketing(req, res){
-        const sql = "SELECT nama,kode,level FROM karyawan WHERE level='MKT';";
+        const sql = "SELECT nama,kode,level FROM karyawan WHERE CONVERT(CAST(karyawan.level AS BINARY) USING utf8)='MKT';";
         pool.getConnection(function(err, connection) {
             if (err) throw err;
             connection.query(sql, function (error, results) {
