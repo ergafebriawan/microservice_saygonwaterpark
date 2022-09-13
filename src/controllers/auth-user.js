@@ -69,5 +69,21 @@ module.exports = {
             });
             connection.release();
         })
+    },
+    getUserMarketing(req, res){
+        const sql = "SELECT nama,kode,level FROM karyawan WHERE level='MKT';";
+        pool.getConnection(function(err, connection) {
+            if (err) throw err;
+            connection.query(sql, function (error, results) {
+                if(error) throw error;  
+                res.status(200).json({ 
+                    success: true, 
+                    message: 'result list user marketing',
+                    data: results 
+                });
+            });
+            connection.release();
+        })
     }
+    
 }

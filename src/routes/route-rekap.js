@@ -13,6 +13,7 @@ router.post('/do-login', authentication.getLogin);
 
 //get all user
 router.get('/all-user', authentication.getAllUser);
+router.get('/user-marketing', authentication.getUserMarketing);
 
 //counter pengunjung
 router.post('/total-pengunjung', counter.seluruhPengunjung);
