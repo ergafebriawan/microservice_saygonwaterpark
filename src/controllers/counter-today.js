@@ -8,7 +8,7 @@ pool.on('error',(err)=> {
 
 module.exports ={
     seluruhPengunjung(req, res){
-        const query = "SELECT itempenjualan.qty, itempenjualan.subtotal FROM (penjualan INNER JOIN itempenjualan ON itempenjualan.kode=penjualan.kode) WHERE penjualan.tanggal=CURRENT_DATE';";
+        const query = "SELECT itempenjualan.qty, itempenjualan.subtotal FROM (penjualan INNER JOIN itempenjualan ON itempenjualan.kode=penjualan.kode) WHERE CONVERT(CAST(penjualan.tanggal AS BINARY) USING utf8)=CURRENT_DATE;";
         pool.getConnection(function(err, connection) {
             if (err) throw err;
             connection.query(query, function (error, results) {
